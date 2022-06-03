@@ -13,9 +13,9 @@ RUN apt-get update \
 				openssl \
 				zip \
 				unzip \
-		&&  pecl install -o -f redis \
+		&&	pecl install -o -f redis \
 		&&	rm -rf /tmp/pear \
-		&&  docker-php-ext-enable redis \
+		&&	docker-php-ext-enable redis \
 		&& docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
 		&& docker-php-ext-install -j$(nproc) gd \
 		&& docker-php-ext-install -j$(nproc) zip \
@@ -58,4 +58,4 @@ RUN curl --output /usr/local/bin/php-fpm-healthcheck https://www.zyria.de/git/py
 RUN set -xe && echo "pm.status_path = /status" >> /usr/local/etc/php-fpm.d/zz-docker.conf
 
 HEALTHCHECK --interval=30s --timeout=12s --start-period=30s \
-    CMD /usr/local/bin/php-fpm-healthcheck -v
+		CMD /usr/local/bin/php-fpm-healthcheck -v
